@@ -1,4 +1,4 @@
-package com.androidcode.imagegallery;
+package com.androidcode.imagegallery.views;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -18,7 +18,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.androidcode.imagegallery.utils.pictureFacer;
+import com.androidcode.imagegallery.viewmodels.GalleryAdapter;
+import com.androidcode.imagegallery.models.ImageGallery;
+import com.androidcode.imagegallery.R;
+import com.androidcode.imagegallery.viewmodels.pictureFacer;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -36,7 +39,7 @@ public class picture extends Fragment {
     ArrayList<pictureFacer> pics;
     private View mview;
     private MainActivity mMainActivity;
-    private static final int MY_READ_PERMISSION_CODE = 101;
+    private static final int MY_READ_PERMISSION_CODE = 1;
 
     public picture() {
         // Required empty public constructor
@@ -55,10 +58,15 @@ public class picture extends Fragment {
                 Manifest.permission.READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED)
         {
             ActivityCompat.requestPermissions(mMainActivity,
-                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},MY_READ_PERMISSION_CODE);
-        }else{
-            loadImage();
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},MY_READ_PERMISSION_CODE);}
+
+        if(ContextCompat.checkSelfPermission(mMainActivity,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(mMainActivity,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},MY_READ_PERMISSION_CODE);
         }
+        loadImage();
         return mview;
     }
 
@@ -74,7 +82,7 @@ public class picture extends Fragment {
                 //Toast.makeText(mMainActivity, ""+position, Toast.LENGTH_SHORT).show();
                 Toast.makeText(mMainActivity, String.valueOf(images.get(position)), Toast.LENGTH_SHORT).show();
 
-                Intent intent = new Intent(mMainActivity,FullScreen.class);
+                Intent intent = new Intent(mMainActivity, FullScreen.class);
                 intent.putExtra("pos",position);
                 intent.putExtra("image",String.valueOf(images.get(position)));
                 startActivity(intent);
@@ -99,7 +107,7 @@ public class picture extends Fragment {
         alertDialog.setPositiveButton("Có", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //mMainActivity.deleteDatabase(images.get(position));
+                mMainActivity.deleteDatabase(images.get(position));
                 File file = new File(images.get(position));
                 file.delete();
                 images.remove(position);

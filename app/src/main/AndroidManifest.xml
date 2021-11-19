@@ -17,18 +17,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="com.androidcode.imagegallery.Albumswipe_img"
+            android:name="com.androidcode.imagegallery.views.Albumswipe_img"
             android:exported="false"
             android:label="@string/title_activity_albumswipe_img"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.androidcode.imagegallery.FullScreen"
+            android:name="com.androidcode.imagegallery.views.FullScreen"
             android:exported="false" />
         <activity
-            android:name="com.androidcode.imagegallery.ImageDisplay"
+            android:name="com.androidcode.imagegallery.views.ImageDisplay"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.androidcode.imagegallery.MainActivity"
+            android:name="com.androidcode.imagegallery.views.MainActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

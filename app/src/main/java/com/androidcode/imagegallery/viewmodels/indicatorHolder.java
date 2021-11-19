@@ -1,4 +1,4 @@
-package com.androidcode.imagegallery.utils;
+package com.androidcode.imagegallery.viewmodels;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;

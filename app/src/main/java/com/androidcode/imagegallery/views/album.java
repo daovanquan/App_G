@@ -1,4 +1,4 @@
-package com.androidcode.imagegallery;
+package com.androidcode.imagegallery.views;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -15,21 +15,27 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.androidcode.imagegallery.utils.MarginDecoration;
-import com.androidcode.imagegallery.utils.PicHolder;
-import com.androidcode.imagegallery.utils.imageFolder;
-import com.androidcode.imagegallery.utils.itemClickListener;
-import com.androidcode.imagegallery.utils.pictureFacer;
-import com.androidcode.imagegallery.utils.pictureFolderAdapter;
+import com.androidcode.imagegallery.models.ImageGallery;
+import com.androidcode.imagegallery.R;
+import com.androidcode.imagegallery.viewmodels.MarginDecoration;
+import com.androidcode.imagegallery.viewmodels.PicHolder;
+import com.androidcode.imagegallery.viewmodels.imageFolder;
+import com.androidcode.imagegallery.viewmodels.itemClickListener;
+import com.androidcode.imagegallery.viewmodels.pictureFacer;
+import com.androidcode.imagegallery.viewmodels.pictureFolderAdapter;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class album extends Fragment implements itemClickListener {
     RecyclerView folderRecycler;
     TextView empty;
     ArrayList<imageFolder> folds;
+    ImageButton imgbtn;
     View mview;
     MainActivity mainActivity;
     RecyclerView.Adapter folderAdapter;
@@ -40,6 +46,7 @@ public class album extends Fragment implements itemClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mview = inflater.inflate(R.layout.fragment_album, container, false);
+
         mainActivity = (MainActivity) getActivity();
         if(ContextCompat.checkSelfPermission(mainActivity,
                 Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -47,6 +54,24 @@ public class album extends Fragment implements itemClickListener {
             ActivityCompat.requestPermissions(mainActivity,
                     new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                     MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
+
+        if(ContextCompat.checkSelfPermission(mainActivity,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED)
+            ActivityCompat.requestPermissions(mainActivity,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE);
+
+        imgbtn = mview.findViewById(R.id.img_button_Album);
+
+        imgbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mainActivity, "Da click button", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
         folderRecycler = mview.findViewById(R.id.folderRecycler);
         folderRecycler.addItemDecoration(new MarginDecoration(mainActivity));
         folderRecycler.hasFixedSize();
@@ -60,7 +85,6 @@ public class album extends Fragment implements itemClickListener {
             folderRecycler.setAdapter(folderAdapter);
         }
 
-        //changeStatusBarColor();
         return mview;
     }
 
@@ -71,10 +95,11 @@ public class album extends Fragment implements itemClickListener {
 
     @Override
     public void onPicClicked(String pictureFolderPath,String folderName) {
-        Intent move = new Intent(mainActivity,ImageDisplay.class);
+        Intent move = new Intent(mainActivity, ImageDisplay.class);
         move.putExtra("folderPath",pictureFolderPath);
         move.putExtra("folderName",folderName);
 
+        Toast.makeText(mainActivity, pictureFolderPath, Toast.LENGTH_SHORT).show();
         //move.putExtra("recyclerItemSize",getCardsOptimalWidth(4));
         startActivity(move);
     }
@@ -94,6 +119,8 @@ public class album extends Fragment implements itemClickListener {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 //mMainActivity.deleteDatabase(images.get(position));
+                File file = new File(folds.get(position).getPath());
+                file.delete();
                 folds.remove(position);
                 folderAdapter.notifyDataSetChanged();
 

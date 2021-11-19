@@ -1,4 +1,4 @@
-package com.androidcode.imagegallery;
+package com.androidcode.imagegallery.viewmodels;
 
 import android.content.Context;
 import android.view.GestureDetector;

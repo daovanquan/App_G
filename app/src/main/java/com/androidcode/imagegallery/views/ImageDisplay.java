@@ -1,11 +1,15 @@
-package com.androidcode.imagegallery;
+package com.androidcode.imagegallery.views;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.View;
@@ -14,11 +18,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.androidcode.imagegallery.utils.MarginDecoration;
-import com.androidcode.imagegallery.utils.PicHolder;
-import com.androidcode.imagegallery.utils.itemClickListener;
-import com.androidcode.imagegallery.utils.pictureFacer;
-import com.androidcode.imagegallery.utils.picture_Adapter;
+import com.androidcode.imagegallery.models.ImageGallery;
+import com.androidcode.imagegallery.R;
+import com.androidcode.imagegallery.viewmodels.MarginDecoration;
+import com.androidcode.imagegallery.viewmodels.PicHolder;
+import com.androidcode.imagegallery.viewmodels.itemClickListener;
+import com.androidcode.imagegallery.viewmodels.pictureFacer;
+import com.androidcode.imagegallery.viewmodels.picture_Adapter;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -30,7 +36,7 @@ public class ImageDisplay extends AppCompatActivity implements itemClickListener
     RecyclerView imageRecycler;
     ArrayList<pictureFacer> allpictures;
     ProgressBar load;
-    String foldePath;
+    String foldePath,foldName;
     TextView folderName;
 
     picture_Adapter adapter;
@@ -40,8 +46,23 @@ public class ImageDisplay extends AppCompatActivity implements itemClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_display);
 
+        if(ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED)
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                    1);
+
+        if(ContextCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED)
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    1);
+
         folderName = findViewById(R.id.foldername);
-        folderName.setText(getIntent().getStringExtra("folderName"));
+        foldName = getIntent().getStringExtra("folderName");
+        folderName.setText(foldName);
         foldePath =  getIntent().getStringExtra("folderPath");
         allpictures = new ArrayList<>();
         imageRecycler = findViewById(R.id.recycler);
@@ -67,9 +88,10 @@ public class ImageDisplay extends AppCompatActivity implements itemClickListener
         Toast.makeText(this, "Đường dẫn :" + facer.getPicturePath() +"\n" +
                 "Kích cỡ :" + facer.getPictureSize() + "\n" + " Tên ảnh :" + facer.getPictureName()   , Toast.LENGTH_LONG).show();
 
-        Intent intent = new Intent(this,Albumswipe_img.class);
+        Intent intent = new Intent(this, Albumswipe_img.class);
         intent.putExtra("posi",position);
         intent.putExtra("path",foldePath);
+        intent.putExtra("Tenfold",foldName);
         startActivity(intent);
     }
 

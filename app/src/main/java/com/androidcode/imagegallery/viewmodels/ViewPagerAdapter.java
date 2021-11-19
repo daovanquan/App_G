@@ -1,9 +1,12 @@
-package com.androidcode.imagegallery;
+package com.androidcode.imagegallery.viewmodels;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
+
+import com.androidcode.imagegallery.views.album;
+import com.androidcode.imagegallery.views.picture;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 

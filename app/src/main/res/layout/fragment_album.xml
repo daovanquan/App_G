@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/black"
-    tools:context=".album">
+    tools:context=".views.album">
 
 
     <RelativeLayout
@@ -46,7 +46,7 @@
 
         </androidx.cardview.widget.CardView>
 
-        <com.androidcode.imagegallery.utils.AutoFitRecyclerView
+        <com.androidcode.imagegallery.viewmodels.AutoFitRecyclerView
             android:id="@+id/folderRecycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -61,7 +61,7 @@
        app:fastScrollVerticalThumbDrawable="@drawable/thumb_drawable"
        app:fastScrollVerticalTrackDrawable="@drawable/line_drawable"-->
 
-        </com.androidcode.imagegallery.utils.AutoFitRecyclerView>
+        </com.androidcode.imagegallery.viewmodels.AutoFitRecyclerView>
 
     </RelativeLayout>
 

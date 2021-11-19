@@ -1,4 +1,4 @@
-package com.androidcode.imagegallery;
+package com.androidcode.imagegallery.viewmodels;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.androidcode.imagegallery.R;
 import com.bumptech.glide.Glide;
 
 import java.util.List;

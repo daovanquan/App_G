@@ -1,4 +1,4 @@
-package com.androidcode.imagegallery.utils;
+package com.androidcode.imagegallery.viewmodels;
 
 import android.graphics.Rect;
 import android.view.View;

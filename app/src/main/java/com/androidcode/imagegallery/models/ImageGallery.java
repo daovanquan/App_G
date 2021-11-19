@@ -1,4 +1,4 @@
-package com.androidcode.imagegallery;
+package com.androidcode.imagegallery.models;
 
 import android.content.Context;
 import android.database.Cursor;
@@ -6,8 +6,8 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.util.Log;
 
-import com.androidcode.imagegallery.utils.imageFolder;
-import com.androidcode.imagegallery.utils.pictureFacer;
+import com.androidcode.imagegallery.viewmodels.imageFolder;
+import com.androidcode.imagegallery.viewmodels.pictureFacer;
 
 import java.util.ArrayList;
 
