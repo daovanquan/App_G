@@ -29,7 +29,7 @@ public class Custom_dialog extends AppCompatDialogFragment {
 
         View view = inflater.inflate(R.layout.custom_dialog,null);
 
-        builder.setView(view).setTitle("Nhập đường dẫn thư mục xong click thêm 1 lần nữa.").setPositiveButton("Có",new DialogInterface.OnClickListener() {
+        builder.setView(view).setTitle("Nhập tên thư mục và click thêm 1 lần nữa.").setPositiveButton("Có",new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
