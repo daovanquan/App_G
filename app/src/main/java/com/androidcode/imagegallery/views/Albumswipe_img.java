@@ -170,7 +170,7 @@ public class Albumswipe_img extends AppCompatActivity implements Custom_dialog.C
             throw new RuntimeException(e);
         }
 
-        startActivity(Intent.createChooser(intentshare,"share image"));
+        startActivity(Intent.createChooser(intentshare,"Chia sẻ ảnh tới : "));
     }
 
 
