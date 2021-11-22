@@ -10,7 +10,7 @@ import com.androidcode.imagegallery.models.ImageGallery;
 import com.androidcode.imagegallery.viewmodels.MoveFile;
 import com.androidcode.imagegallery.viewmodels.OnSwipeTouchListener;
 import com.androidcode.imagegallery.R;
-import com.androidcode.imagegallery.viewmodels.pictureFacer;
+import com.androidcode.imagegallery.models.pictureFacer;
 import com.bumptech.glide.Glide;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,7 +19,6 @@ import android.os.StrictMode;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -121,7 +120,7 @@ public class Albumswipe_img extends AppCompatActivity implements Custom_dialog.C
                     imgV.setImageURI(Uri.parse(facer.getPicturePath()));
 
                     Toast.makeText(Albumswipe_img.this, "Đường dẫn :" + facer.getPicturePath() + "\n" +
-                            "Kích cỡ :" + facer.getPictureSize() + "\n" + "Tên ảnh :" + facer.getPictureName(), Toast.LENGTH_LONG).show();
+                            "Kích cỡ :" + facer.getPictureSize() + " Kb\n" + "Tên ảnh :" + facer.getPictureName(), Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -132,7 +131,7 @@ public class Albumswipe_img extends AppCompatActivity implements Custom_dialog.C
                     pictureFacer facer = pics.get(position);
                     imgV.setImageURI(Uri.parse(facer.getPicturePath()));
                     Toast.makeText(Albumswipe_img.this, "Đường dẫn :" + facer.getPicturePath() + "\n" +
-                            "Kích cỡ :" + facer.getPictureSize() + "\n" + "Tên ảnh :" + facer.getPictureName(), Toast.LENGTH_LONG).show();
+                            "Kích cỡ :" + facer.getPictureSize() + " Kb\n" + "Tên ảnh :" + facer.getPictureName(), Toast.LENGTH_LONG).show();
 
                 }
             }

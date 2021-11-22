@@ -6,9 +6,6 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.util.Log;
 
-import com.androidcode.imagegallery.viewmodels.imageFolder;
-import com.androidcode.imagegallery.viewmodels.pictureFacer;
-
 import java.util.ArrayList;
 
 public class ImageGallery {

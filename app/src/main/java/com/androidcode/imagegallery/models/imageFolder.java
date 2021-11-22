@@ -1,4 +1,4 @@
-package com.androidcode.imagegallery.viewmodels;
+package com.androidcode.imagegallery.models;
 
 
 public class imageFolder {

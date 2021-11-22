@@ -1,5 +1,7 @@
 package com.androidcode.imagegallery.viewmodels;
 
+import com.androidcode.imagegallery.models.pictureFacer;
+
 import java.util.ArrayList;
 
 

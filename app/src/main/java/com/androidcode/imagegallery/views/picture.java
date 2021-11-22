@@ -21,7 +21,7 @@ import android.widget.Toast;
 import com.androidcode.imagegallery.viewmodels.GalleryAdapter;
 import com.androidcode.imagegallery.models.ImageGallery;
 import com.androidcode.imagegallery.R;
-import com.androidcode.imagegallery.viewmodels.pictureFacer;
+import com.androidcode.imagegallery.models.pictureFacer;
 
 import java.io.File;
 import java.util.ArrayList;

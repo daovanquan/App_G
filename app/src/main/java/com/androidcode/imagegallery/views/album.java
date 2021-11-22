@@ -23,9 +23,9 @@ import com.androidcode.imagegallery.models.ImageGallery;
 import com.androidcode.imagegallery.R;
 import com.androidcode.imagegallery.viewmodels.MarginDecoration;
 import com.androidcode.imagegallery.viewmodels.PicHolder;
-import com.androidcode.imagegallery.viewmodels.imageFolder;
+import com.androidcode.imagegallery.models.imageFolder;
 import com.androidcode.imagegallery.viewmodels.itemClickListener;
-import com.androidcode.imagegallery.viewmodels.pictureFacer;
+import com.androidcode.imagegallery.models.pictureFacer;
 import com.androidcode.imagegallery.viewmodels.pictureFolderAdapter;
 
 import java.io.File;
