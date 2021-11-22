@@ -86,7 +86,7 @@ public class ImageDisplay extends AppCompatActivity implements itemClickListener
         //pictureBrowserFragment browser = pictureBrowserFragment.newInstance(pics,position,ImageDisplay.this);
         pictureFacer facer = pics.get(position);
         Toast.makeText(this, "Đường dẫn :" + facer.getPicturePath() +"\n" +
-                "Kích cỡ :" + facer.getPictureSize() + "\n" + " Tên ảnh :" + facer.getPictureName()   , Toast.LENGTH_LONG).show();
+                "Kích cỡ :" + facer.getPictureSize() + "\n" + "Tên ảnh :" + facer.getPictureName()   , Toast.LENGTH_LONG).show();
 
         Intent intent = new Intent(this, Albumswipe_img.class);
         intent.putExtra("posi",position);

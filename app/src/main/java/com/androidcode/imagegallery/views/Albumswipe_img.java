@@ -1,5 +1,8 @@
 package com.androidcode.imagegallery.views;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -12,6 +15,7 @@ import com.bumptech.glide.Glide;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.os.StrictMode;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -20,6 +24,7 @@ import android.widget.Toast;
 
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -30,7 +35,7 @@ public class Albumswipe_img extends AppCompatActivity implements Custom_dialog.C
     private int position;
     private String linkpath,tenpath;
     private Button btnmove;
-    private Button btncopy;
+    private Button btncopy,btnshare;
     private String temppath;
     private String pathnewfold;
     public void openDialog(View view)
@@ -46,6 +51,7 @@ public class Albumswipe_img extends AppCompatActivity implements Custom_dialog.C
 
         btnmove = findViewById(R.id.btn_move_pic_album);
         btncopy = findViewById(R.id.btncopy_pic_album);
+        btnshare = findViewById(R.id.btn_share);
         imgV = findViewById(R.id.album_swipe_img);
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
@@ -98,6 +104,12 @@ public class Albumswipe_img extends AppCompatActivity implements Custom_dialog.C
             }
         });
 
+        btnshare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                image();
+            }
+        });
 
         imgV.setOnTouchListener(new OnSwipeTouchListener(Albumswipe_img.this) {
 
@@ -127,6 +139,41 @@ public class Albumswipe_img extends AppCompatActivity implements Custom_dialog.C
 
         });
     }
+
+    private void image()
+    {
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
+
+        BitmapDrawable drawable = (BitmapDrawable) imgV.getDrawable();
+        Bitmap bitmap = drawable.getBitmap();
+
+        File f = new File(getExternalCacheDir()+ "/" + getResources().
+                getString(R.string.app_name) + "png");
+
+        Intent intentshare;
+
+        try {
+
+            FileOutputStream outputStream = new FileOutputStream(f);
+            bitmap.compress(Bitmap.CompressFormat.PNG,100,outputStream);
+
+            outputStream.flush();
+            outputStream.close();
+
+            intentshare = new Intent(Intent.ACTION_SEND);
+
+            intentshare.setType("image/*");
+            intentshare.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(f));
+            intentshare.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }
+
+        startActivity(Intent.createChooser(intentshare,"share image"));
+    }
+
 
     @Override
     public void applyText(String text) {
